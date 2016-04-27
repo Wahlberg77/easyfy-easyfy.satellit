@@ -1,0 +1,36 @@
+﻿@using Easyfy.Satellit.Model.Posts
+@{
+  ViewBag.Title = "_RecentPosts";
+}
+
+
+<div class="widget widget_latest_post">
+  <h4>Senaste inlägg</h4>
+  @foreach (var post in Model.Posts)
+  {
+    <ul>
+      <li>
+        @*--- Lägg in bilder här om ni vill ha unik bild för varje inlägg.---*@
+        @*<div class="image-wrap">
+          <img src="@Url.Content("~/Content/images/latest/60x60.gif")"/>
+        </div>*@
+
+        <div class="content-text">
+          <a href="/posts/@post.FriendlyUrl">
+            @post.Title
+          </a>
+          <br/>
+          <span class="date">@post.Created.Day/@post.Created.Month-@post.Created.Year</span>
+          <br/>
+          <span class="author">@post.Author</span>
+        </div>
+      </li>
+    </ul>
+  }
+</div>
+
+  
+
+
+    
+

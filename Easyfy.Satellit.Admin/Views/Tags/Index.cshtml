@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Easyfy.Satellit.Model.Posts.Post>
+
+
+@{
+  ViewBag.Title = "Index";
+}
+
+<h2>Sök på taggar</h2>
+
+<div class=" search-bar">
+  <input data-action="post-search" placeholder="Sök på Taggar" type="text" />
+</div>
+<br />
+
+<div data-placeholder="post-list">
+  @Html.Partial("_ListOfTags", Model)
+</div>
+

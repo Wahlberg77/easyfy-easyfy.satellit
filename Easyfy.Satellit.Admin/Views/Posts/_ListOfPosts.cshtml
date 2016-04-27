@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Easyfy.Satellit.Model.Posts.Post>
+
+
+<table class="table">
+  <tr>
+    <th>
+      <label for=" Title" class=" control-label"> Titel</label>
+    </th>
+    <th>
+      <label for="Status" class=" control-label">Status</label>
+    </th>
+    <th>
+      <label for="Created" class=" control-label">Skapad</label>
+    </th>
+    <th>
+      <label for="BlogReference" class=" control-label">Referense</label>
+    </th>
+    <th>
+      <label for="Author" class=" control-label">Författare</label>
+    </th>
+    <th></th>
+  </tr>
+
+  @foreach (var item in Model)
+  {
+    <tr>
+      <td>
+        @Html.DisplayFor(modelItem => item.Title)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Status)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Created)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.BlogReference)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Author)
+      </td>
+      <td>
+        
+        @*-- Lägga en href här istället när bloggarna är live --*@
+
+        @*@Html.ActionLink("Visa", "SinglePost","Home",new { area="Home", id = item.Id.Split('/')[1] }, new { @class = "btn btn-success" })*@
+        @Html.ActionLink("Ändra", "Edit", new {id = item.Id.Split('/')[1]}, new {@class = "btn btn-warning"})
+        @Html.ActionLink("Radera", "Delete", new {id = item.Id.Split('/')[1]}, new {@class = "btn btn-danger"})
+      </td>
+    </tr>
+  }
+
+</table>

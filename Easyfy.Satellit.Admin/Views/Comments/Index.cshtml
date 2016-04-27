@@ -1,0 +1,91 @@
+﻿@using Easyfy.Satellit.Model.Comment
+@model Easyfy.Satellit.Admin.Models.CommentVm
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nya kommentarer</h2>
+
+<table class="table">
+  <tr>
+    @*<th>
+        <label for="Id" class=" control-label"> Id</label>
+      </th>*@
+    <th>
+      <label for="BlogName" class=" control-label"> Blogg</label>
+    </th>
+    <th>
+      <label for="PostName" class=" control-label"> Inlägg</label>
+    </th>
+    <th>
+      <label for="Title" class=" control-label"> Titel</label>
+    </th>
+    <th>
+      <label for="Author" class=" control-label"> Författare</label>
+    </th>
+    <th>
+      <label for="Content" class=" control-label"> Innehåll</label>
+    </th>
+    <th>
+      <label for="Email" class=" control-label"> Email</label>
+    </th>
+    <th>
+      <label for="Url" class=" control-label"> Url</label>
+    </th>
+    <th></th>
+
+  </tr>
+
+
+
+  @foreach (var test in Model.MyTables)
+  {
+    <tr>
+      <td>
+        @Html.DisplayFor(o => test.BlogName)
+      </td>
+      <td>
+        @Html.DisplayFor(o => test.PostTitle)
+      </td>
+      <td>
+        @Html.DisplayFor(o => test.CommentTitle)
+      </td>
+      <td>
+        @Html.DisplayFor(o => test.CommentAuthor)
+      </td>
+      <td>
+        <button id="@test.CommentId" type="button" class="btn btn-default pop" data-container="body" data-toggle="popover"
+                data-placement="bottom">
+          Läs kommentaren
+        </button>
+
+        <div id="@(test.CommentId)_content" class="popSourceBlock">
+          <div class="popContent">
+            @Html.DisplayFor(o => test.CommentContent)
+          </div>
+        </div>
+      </td>
+      <td>
+        @Html.DisplayFor(o => test.CommentEmail)
+      </td>
+      <td>
+        @Html.DisplayFor(o => test.CommentUrl)
+      </td>
+      <td>
+
+        @Html.ActionLink("Godkänn", "Confirm", "Comments",
+          new {postId = test.PostId.Split('/')[1], commentId = test.CommentId},
+          new {@class = "btn btn-success", onclick = "return confirm('Vill du godkänna denna kommentar?')"})
+
+        @Html.ActionLink("Radera", "DeleteConfirmed", "Comments",
+          new {postId = test.PostId.Split('/')[1], commentId = test.CommentId},
+          new {@class = "btn btn-danger", onclick = "return confirm('Vill du radera denna kommentar?')"})
+
+      </td>
+    </tr>
+  }
+</table>
+
+

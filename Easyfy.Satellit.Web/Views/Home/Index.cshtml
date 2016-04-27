@@ -1,0 +1,106 @@
+﻿@model Easyfy.Satellit.Web.Models.MainPostVm
+
+@{
+  ViewBag.Title = "Home Page";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section>
+@foreach (var post in Model.Posts)
+{
+<div class="post">
+  <div class="post-media">
+    @*<div class="image-wrap">
+      <img src="@Url.Content("~/Content/images/buteljer.jpg")"/>
+    </div>*@
+    @*<div class="post-cat">
+          <a href="#">Travel</a>
+        </div>*@
+  </div>
+  <div class="post-meta">
+    @*<div class="post-format">
+          <a href="#"><i class="fa fa-image"></i></a>
+        </div>*@
+
+    @*//Datum på skapandet av inlägget*@
+    <div class="post-date">
+      <span class="year">
+         
+            @post.Created.Year
+          
+        </span>
+      <span class="month">
+         
+            @post.Created.Month
+          
+        </span>
+      <span class="day">
+         
+            @post.Created.Day
+          
+        </span>
+    </div>
+
+    <div class="post-comment">
+      <i class="fa fa-comment"></i>
+      <a>@post.Comments.Count(c => c.IsPublished)</a>
+    </div>
+  </div>
+  <div class="post-body">
+
+    @*//Författare*@
+    <div class="post-author">
+      <div class="image-thumb">
+        <img src="@Url.Content("~/Content/images/author/50x50.gif")"/>
+      </div>
+      <div class="name-author">
+        <cite>
+
+          @post.Author
+
+        </cite>
+      </div>
+    </div>
+
+    @*//Titel på posten*@
+    <div class="post-title">
+      <h2>
+        <a href="/posts/@post.FriendlyUrl">
+          @post.Title
+        </a>
+      </h2>
+    </div>
+
+    <div class="post-entry">
+      <p>
+        @Html.Raw(Model.GetParagraphs(post.Content, 2))
+      </p>
+    </div>
+
+    <div class="post-link">
+      <a href="/posts/@post.FriendlyUrl" class="pi-btn">Läs mer</a>
+    </div>
+    <div class="post-share">
+      <span class="share-toggle 
+            pi-btn">
+      <i class="fa fa-share-alt"></i>
+    </span>
+      <div class="share">
+        <div class="fb-share-button" data-href="/posts/@post.FriendlyUrl" data-layout="icon"></div>
+        <a href="https://twitter.com/intent/tweet"><i class="fa fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- PAGINATION -->
+<div class="pagination">
+  <a href="#" class="prev">&laquo; Nyare inlägg</a>
+  <a href="#" class="next">Äldre inlägg &raquo;</a>
+</div>
+<!-- END / PAGINATION -->
+</section>
+
+<!-- POST -->
+
+

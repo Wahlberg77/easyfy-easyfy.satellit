@@ -1,0 +1,83 @@
+﻿@using System.Web.Mvc.Html
+@model Easyfy.Satellit.Web.Models.SinglePostVm
+
+@{
+    ViewBag.Title = "SinglePost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- POST -->
+<div class="post">
+  <div class="post-media">
+    
+    @*//Bild högst upp på enskilda posten.*@
+    @*<div class="image-wrap">
+      <img src="@Url.Content("~/Content/images/buteljer.jpg")"/>
+    </div>*@
+  </div>
+  <div class="post-meta">
+    @*//Datum på skapandet av inlägget*@
+    <div class="post-date">
+      <span class="year"> 
+                          @Model.Post.Created.Year
+                         </span>
+      <span class="month">
+                          @Model.Post.Created.Month
+                          </span>
+      <span class="day">
+                          @Model.Post.Created.Day
+                        </span>
+    </div>
+
+    @*//Kommentarer vid inlägget.*@
+    <div class="post-comment">
+      <i class="fa fa-comment"></i>
+      <a>@Model.Post.Comments.Count(c => c.IsPublished)</a>
+    </div>
+  </div>
+  <div class="post-body">
+    
+    @*//Titel på inlägget*@
+    <div class="post-title">
+      <h1>
+            @Model.Post.Title
+          </h1>
+    </div>
+
+    @*//Postens Content*@
+    <div class="post-entry">
+      <p>
+
+        @Html.Raw(@Model.Post.Content)
+
+      </p>
+    </div>
+    <br/>
+    <div>
+      <h5>Taggar</h5>
+      <div class="tagcloud">
+        @foreach (var tag in Model.Post.InternalTags)
+        {
+          <a>@tag</a>
+        }
+        
+      </div>
+    </div>
+
+    @*//Dela under varje inlägg.*@
+    <div class="post-share">
+      <span class="share-toggle pi-btn">
+        <i class="fa fa-share-alt"></i>
+      </span>
+      <div class="share">
+        <div class="fb-share-button" data-href="@Model.Post.FriendlyUrl" data-layout="icon"></div>
+        <a href="https://twitter.com/intent/tweet"><i class="fa fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END / POST -->
+
+@Html.Partial("_Comments")
+
+

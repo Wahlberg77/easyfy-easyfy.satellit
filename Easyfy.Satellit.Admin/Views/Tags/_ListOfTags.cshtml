@@ -1,0 +1,42 @@
+﻿@using Easyfy.Satellit.Model.Posts
+@model IEnumerable<Easyfy.Satellit.Model.Posts.Post>
+
+
+<table class="table">
+  <tr>    
+    <th>
+      <p>Bloggnamn</p>
+    </th>
+    <th>
+      <p>Titel på inlägget</p>
+    </th>
+    <th>
+      <p>Taggar</p>
+    </th>
+    <th></th>
+  </tr>
+
+  @foreach (var item in Model)
+  {
+    <tr>
+
+      <td>
+        @{
+    var urlToBlog = item.BlogReference + "?xid=" + item.Id.Split('/')[1];
+        }
+
+        <a href="@urlToBlog">@item.BlogReference</a>
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Title)
+      </td>
+      <td>
+        @foreach (var tag in item.InternalTags)
+        {
+          <span>@(tag),</span>
+        }
+      </td>
+    </tr>
+  }
+
+</table>

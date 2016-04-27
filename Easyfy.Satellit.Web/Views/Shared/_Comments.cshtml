@@ -1,0 +1,101 @@
+﻿@using Easyfy.Data.RavenDb.Indexes
+@using Easyfy.Satellit.Model.Extensions.StringExtensions
+@using Easyfy.Satellit.Web.Models
+@model Easyfy.Satellit.Web.Models.SinglePostVm
+
+@{
+  ViewBag.Title = "_Comments";
+}
+
+<div class="col-xs-12 col-sm-9">
+  <div class="well">
+
+    <h4>Lämna en kommentar</h4>
+
+    @using (Html.BeginForm("SaveComment", "Home", new { xid = Model.PostId}, FormMethod.Post))
+    {
+      @Html.AntiForgeryToken()
+
+      <div style="display: none;">
+        @Html.EditorFor(o => o.BlogRef)
+
+        @Html.EditorFor(model => model.PostId)
+
+      </div>
+      <div class="form-group comment-form-author">
+        @Html.LabelFor(model => model.Comment.Author, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="sr-only" for="name">Name</label>
+        @Html.EditorFor(model => model.Comment.Author, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Comment.Author, "", new { @class = "text-danger" })
+      </div>
+
+      <div class="form-group comment-form-email">
+        @Html.LabelFor(model => model.Comment.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="sr-only" for="Email">Email</label>
+        @Html.EditorFor(model => model.Comment.Email, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Comment.Email, "", new { @class = "text-danger" })
+      </div>
+
+  <div class="form-group comment-form-Title">
+    @Html.LabelFor(model => model.Comment.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+    <label class="sr-only" for="Title">Title</label>
+    @Html.EditorFor(model => model.Comment.Title, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Comment.Title, "", new { @class = "text-danger" })
+  </div>
+
+      <div class="form-group comment-form-comment">
+        @Html.LabelFor(model => model.Comment.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="sr-only" for="Content">Content</label>
+        @Html.EditorFor(model => model.Comment.Content, new
+        {
+          htmlAttributes = new
+          {
+            @class = "form-control",
+            cols = "45",
+            rows = "8"
+          }
+        })
+        @Html.ValidationMessageFor(model => model.Comment.Content, "", new { @class = "text-danger" })
+      </div>
+
+      <div class="form-grou comment-form-url">
+        @Html.LabelFor(model => model.Comment.Url, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="sr-only" for="Url">Url</label>
+        @Html.EditorFor(model => model.Comment.Url, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Comment.Url, "", new { @class = "text-danger" })
+        <div class="form-group text-right">
+          <button type="submit" class="btn btn">Skicka</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+<br />
+
+@foreach (var comments in Model.Post.Comments.Where(o=>o.IsPublished))
+{
+  <div class="col-xs-12 col-sm-9">
+
+    <ul id="comments" class="comments">
+      <li class="comment">
+        <div class="clearfix">
+          <h4 class="pull-left">@comments.Author</h4>
+        </div>
+        <p>
+          <em>@comments.Title </em>
+        </p>
+        <p>
+          <em>@comments.Content </em>
+        </p>
+        <p>
+          <em>@comments.Url</em>
+        </p>
+      </li>
+    </ul>
+  </div>
+}
+
+@section Scripts {
+  @Scripts.Render("~/bundles/jqueryval")
+}
+

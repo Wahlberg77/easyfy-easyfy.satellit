@@ -1,0 +1,23 @@
+﻿
+@*@model List<Easyfy.Satellit.Model.Posts.Post>*@
+@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+@*@foreach (var post in Model)
+{
+  <div>
+    <h3>@post.Title</h3>
+    <p>@post.Content</p>
+    <small>@post.Author</small>
+  </div>
+}*@
+
+
+<address>
+    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+</address>

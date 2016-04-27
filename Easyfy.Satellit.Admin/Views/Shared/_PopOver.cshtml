@@ -1,0 +1,13 @@
+﻿<script>
+  $(".pop").each(function () {
+    var $pElem = $(this);
+    $pElem.popover(
+        {
+          content: getPopContent($pElem.attr("id"))
+        }
+    );
+  });
+  function getPopContent(target) {
+    return $("#" + target + "_content > div.popContent").html();
+  };
+</script>

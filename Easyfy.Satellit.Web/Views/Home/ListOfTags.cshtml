@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Easyfy.Satellit.Model.Posts.Post>
+
+
+<table class="table">
+  <tr>
+    <th>
+      @Html.DisplayNameFor(model => model.BlogReference)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.Title)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.Tags)
+    </th>
+    <th></th>
+  </tr>
+
+@foreach (var item in Model) {
+  <tr>
+    <td>
+      @Html.DisplayFor(modelItem => item.BlogReference)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+      @Html.DisplayFor(modelItem => item.Tags)
+    </td>
+  </tr>
+}
+</table>

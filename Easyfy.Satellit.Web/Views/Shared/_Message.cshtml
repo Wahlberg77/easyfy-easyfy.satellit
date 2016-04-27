@@ -1,0 +1,24 @@
+﻿
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+    @if (TempData["success"] != null)
+    {
+        <text> 
+            toastr.success('@TempData["success"]')
+        </text>
+    }
+
+    @if (TempData["error"] != null)
+    {
+        <text> 
+        toastr.error('@TempData["error"]')
+        </text>
+    }
+
+    });
+
+</script>
+

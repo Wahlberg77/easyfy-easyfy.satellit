@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Easyfy.Satellit.Model.Posts.Post>
+
+
+@{
+  ViewBag.Title = "Index";
+}
+
+<h2>Index över inlägg</h2>
+
+<p>
+  @Html.ActionLink("Nytt inlägg", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<div class=" search-bar">
+    <input data-action="post-search" placeholder="Sök på titel" type="text"/>
+</div>
+<br />
+
+<div data-placeholder="post-list" >
+  @Html.Partial("_ListOfPosts", Model)
+</div>

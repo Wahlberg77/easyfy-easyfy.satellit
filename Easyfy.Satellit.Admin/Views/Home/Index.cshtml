@@ -1,0 +1,78 @@
+﻿@using Easyfy.Satellit.Model.Posts
+@model Easyfy.Satellit.Admin.Models.AdminPanelvM
+
+@{
+  ViewBag.Title = "Startsidan";
+}
+
+<div class="jumbotron">
+  <img src="~/Content/Images/logoeasyfy.png" class="img-responsive" alt="Easyfy" />
+  <h1>Admin Panelen</h1>
+  <p class="lead">Samling över bloggar och inlägg!</p>
+  <p>
+    @Html.ActionLink("Skapa nytt inlägg", "create", "Posts", null, new {@class = "btn btn-primary"})
+  </p>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <h2>Inlägg</h2>
+    <p>
+      Lista med blogginlägg för samtliga bloggar.<br/>Skapa nytt inlägg.
+    </p>
+    <p>@Html.ActionLink("Lista", "Index", "Posts", null, new {@class = "btn btn-primary"})</p>
+
+      <table class="table">
+        <tr>
+          <th>
+            <label for="Title" class=" control-label">Senaste posterna</label>
+          </th>
+        </tr>
+        @foreach (var item in Model.Posts)
+        {
+          <tr>
+            <td>
+              <a href="@Url.Action("Edit", "Posts", new {id = Model.TakeIdNr(item.Id)})">@item.Title</a>
+            </td>
+          </tr>
+        }
+      </table>
+  </div>
+
+  <div class="col-md-4">
+    <h2>Bloggar</h2>
+    <p>Lista med hemsidor/bloggar.<br/>Skapa ny blogg
+    </p>
+    <p>@Html.ActionLink("Lista", "index", "Blogs", null, new {@class = "btn btn-primary"})</p>
+    <table class="table">
+      <tr>
+        <th>
+          <label for="BlogName" class=" control-label">Senaste bloggarna</label>
+        </th>
+      </tr>
+      @foreach (var item in Model.Blogs)
+      {
+        <tr>
+          <td>
+            @{
+              //var urlToBlog = item.Url + "?xid=" + item.Id.Split('/')[1];
+              var urlToBlog = item.Url;
+            }
+
+            <a href="@urlToBlog">@item.BlogName</a>
+          </td>
+        </tr>
+      }
+    </table>
+  </div>
+
+  <div class="col-md-4">
+    <h2>Kommentarer</h2>
+    <a href="@Url.Action("Index", "Comments")" class="btn btn-primary">
+      <span class="badge">@Model.AllNotApprovedCommentsCount</span> nya kommentarer
+    </a>
+    <br/>
+    <h2>Inläggens taggar</h2>
+    <p>@Html.ActionLink("Lista", "Index", "Tags", null, new { @class = "btn btn-primary" })</p>
+  </div>
+</div>
